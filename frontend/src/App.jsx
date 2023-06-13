@@ -9,9 +9,7 @@ function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <div className="App">
-      <Navbar onOpen={onOpen}/>
-      <Sidebar onClose={onClose} isOpen={isOpen}/>
-      <Box mt={"85px"}>
+      <Box>
         <AllRoutes/>
       </Box>
     </div>

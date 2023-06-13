@@ -3,6 +3,7 @@ require("dotenv").config()
 const Authenticator=(req,res,next)=>{
     try{
         let  token=req.headers.authorization;
+        console.log(token)
         const decoded=jwt.verify(token,process.env.SecretKey)
         if(decoded){
             
