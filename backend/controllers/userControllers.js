@@ -72,6 +72,7 @@
             last_name: checkUser.last_name,
             role: checkUser.role,
             email: checkUser.email,
+            userId:checkUser._id
             });
         }
         }

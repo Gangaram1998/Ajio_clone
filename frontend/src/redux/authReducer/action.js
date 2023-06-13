@@ -9,11 +9,12 @@ export const LoginAction=(userData)=>async(dispatch)=>{
         const res=await axios.post(`http://localhost:4500/user/login`,userData)
         if(res.data.status === 200){
             dispatch({type:LOGIN_SUCCESS,payload:res.data})
-            return {satus:1,msg:res.data.message}
+            return res.data.status
+            
         }
         else{
             dispatch({type:LOGIN_FAILURE})
-            return {status:0,"msg":res.data.message}
+            return res.data.status
         }
     }
     catch(err){
