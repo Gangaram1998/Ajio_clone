@@ -5,13 +5,21 @@ import {  HamburgerIcon, SearchIcon } from "@chakra-ui/icons"
 import { AiOutlineHeart, } from "react-icons/ai"
 import { BsBag } from "react-icons/bs"
 import { useNavigate } from 'react-router-dom'
+import  Menu  from './Menu'
+import { useDispatch, useSelector } from 'react-redux'
+import { LogoutAction } from '../redux/authReducer/action'
 
 const Navbar = ({onOpen}) => {
+    const dispatch=useDispatch()
     const [menuopen, setMenuopen] = useState(false)
     const navigate=useNavigate()
+    const [menu,setmenu]=useState("")
+    const [showmenu,setShowmenu]=useState(false)
+    const {isAuth,role}=useSelector((store)=>store.authReducer)
     return (
+        <>
         <Box >
-            <Flex height={"85px"} textAlign={"center"} pb={4} display={{ base: "none", md: "flex" }} boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" position={"fixed"} overflow={"hidden"} top={0} left={0} right={0} zIndex={1} bg="white">
+            <Flex height={"85px"} textAlign={"center"} pb={4} display={{ base: "none", md: "flex" }} boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" position={"fixed"} overflow={"hidden"} top={0} left={0} right={0} zIndex={1} bg={"white"}>
                 <Box width={"10%"} marginLeft={"11%"} onClick={()=>navigate("/")} >
                     <Image src='https://assets.ajio.com/static/img/Ajio-Logo.svg' alt="logo" mt={"12px"} />
                 </Box>
@@ -26,25 +34,36 @@ const Navbar = ({onOpen}) => {
                                 }}>Customer Care</Text>
                                 <Text fontSize={"14px"} fontFamily={"SourceSansPro"} bg={"black"} color={"white"} padding={"2px 10px"}>visit AJIOLUXE</Text>
                             </Flex>
-                            <Box display={menuopen ? "block" : "none"} bg={"white"} p={2} border={"1px solid grey"} boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px" width={"10%"} position={"absolute"} marginLeft={"520px"} height={"60px"} zIndex={2} overflow={"hidden"} onMouseEnter={() => setMenuopen(true)} onMouseLeave={() => setMenuopen(false)}>
+                            <Box display={menuopen ? "block" : "none"} bg={"white"} p={2} border={"1px solid grey"} boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px" width={"10%"} position={"absolute"} marginLeft={"520px"} height={"auto"} zIndex={2} overflow={"hidden"} onMouseEnter={() => setMenuopen(true)} onMouseLeave={() => setMenuopen(false)}>
+                                {(role==="admin" || role==="superadmin") && <Text fontSize={"14px"} fontFamily={"SourceSansPro"} _hover={{
+                                    transform: "scale(1.2)",
+                                    transition: "transform 0.2s ease-in-out",
+                                }} >Admin</Text>}
+                                {(role==="admin" || role==="superadmin") && <Divider/>}
+                                {!isAuth?<Text fontSize={"14px"} fontFamily={"SourceSansPro"} _hover={{
+                                    transform: "scale(1.2)",
+                                    transition: "transform 0.2s ease-in-out",
+                                }} onClick={()=>navigate("/login")}>Login</Text>:
                                 <Text fontSize={"14px"} fontFamily={"SourceSansPro"} _hover={{
                                     transform: "scale(1.2)",
                                     transition: "transform 0.2s ease-in-out",
-                                }} >Admin</Text>
-                                <Divider/>
-                                <Text fontSize={"14px"} fontFamily={"SourceSansPro"} _hover={{
-                                    transform: "scale(1.2)",
-                                    transition: "transform 0.2s ease-in-out",
-                                }} onClick={()=>navigate("/login")}>Login</Text>
+                                }} onClick={()=>{
+                                    dispatch(LogoutAction)
+                                    navigate("/")
+                                    }}>Logout</Text>}
                             </Box>
                         </Box>
                         <Box height={"55%"} width={"100%"}  >
                             <HStack spacing={{ md: 4, xl: 6, "2xl": 7 }} >
-                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} >MEN</Text>
-                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"}>WOMEN</Text>
-                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"}>KIDS</Text>
-                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"}>INDIE</Text>
-                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"}>HOME AND KITCHEN</Text>
+                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} _hover={{color:"black",fontWeight:"700"}} onMouseEnter={()=>{
+                                    setmenu("men")
+                                    setShowmenu(true)
+                                }}
+                                >MEN</Text>
+                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} _hover={{color:"black",fontWeight:"700"}} onMouseEnter={()=>{setShowmenu(true);setmenu("women")}}>WOMEN</Text>
+                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} _hover={{color:"black",fontWeight:"700"}}>KIDS</Text>
+                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} _hover={{color:"black",fontWeight:"700"}}>INDIE</Text>
+                                <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} _hover={{color:"black",fontWeight:"700"}}>HOME AND KITCHEN</Text>
                                 <InputGroup width={"25%"} >
                                     <Input type="text" placeholder="Search AJIO" h={"26px"} border={"1px solid black"} borderRadius={"13px"} color={"gray.600"} focusBorderColor='black' p={1} fontSize={{ md: "10px", lg: "14px", xl: "16px" }} />
                                     <InputRightElement h={"20px"}>
@@ -79,6 +98,8 @@ const Navbar = ({onOpen}) => {
                 </VStack>
             </HStack>
         </Box>
+        <Menu menu={menu} showmenu={showmenu} setmenu={setmenu} setShowmenu={setShowmenu}/>
+        </>
     )
 }
 
