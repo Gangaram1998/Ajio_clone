@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CartNavbar from '../components/CartNavbar'
 import { HStack, VStack ,Text, Box} from '@chakra-ui/layout'
 import CartComponent from '../components/CartComponent'
 import { Button } from '@chakra-ui/button'
+import { GetCardData } from '../redux/cartReducer/action'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const Cart = () => {
+    const dispatch=useDispatch()
+    const {userId,token}=useSelector((store)=>store.authReducer)
+
+    useEffect(()=>{
+        let obj={
+            userId
+        }
+        dispatch(GetCardData(obj,token))
+    },[])
   return (
     <>
         <CartNavbar/>
@@ -19,7 +30,6 @@ export const Cart = () => {
                 <Box display={"flex"} flexDirection={"column"}  alignItems={"flex-start"} width={"100%"} padding={"10px 20px"} bg={"gray.100"}gap={"15px"}>
                     <Text fontSize={"18px"} fontWeight={"600"} color={"gray"}>Order Details</Text>
                     <Text>Bag Total:     <span style={{font:"20px",fontWeight:"500",marginLeft:"135px"}}>₹1000</span></Text>
-                    <Text>Bag Discount:  <span style={{font:"20px",fontWeight:"500",marginLeft:"105px"}}>₹1000</span></Text>
                     <Text>Order Total:   <span style={{font:"20px",fontWeight:"500",marginLeft:"120px"}}>₹1000</span></Text>
                     <Button px={"40px"} mt={"20px"} borderRadius={"none"} bg={"orange.400"} color={"white"}>PROCEED TO SHIPPING</Button>
                 </Box>

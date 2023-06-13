@@ -14,7 +14,6 @@ const Login = () => {
     const location=useLocation()
     const state = useSelector((store) => store.authReducer)
     const toast = useToast()
-    console.log(location.pathname)
 
 
 
@@ -27,8 +26,24 @@ const Login = () => {
 
         dispatch(LoginAction(userData))
         .then((res)=>{
-            console.log(res)
-            navigate(`${location.path}`,{replace:true})
+            if(res==200){
+                toast({
+                title: 'Login',
+                description: "please successful!",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+                })
+            }
+            else{
+                toast({
+                    title: 'Login',
+                    description: "please failed!",
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                    })
+            }
         })
 
         setEmail("")

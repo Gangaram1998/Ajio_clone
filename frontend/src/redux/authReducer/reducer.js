@@ -8,7 +8,8 @@ const initialState={
     role:sessionStorage.getItem("role") || "",
     first_name: sessionStorage.getItem("first_name") || "",
     last_name:sessionStorage.getItem("last_name") || "",
-    email:sessionStorage.getItem("email") || ""
+    email:sessionStorage.getItem("email") || "",
+    userId:sessionStorage.getItem("userid") || ""
 }
 export const reducer=(state=initialState,{type,payload})=>{
     switch(type){
@@ -21,7 +22,8 @@ export const reducer=(state=initialState,{type,payload})=>{
             sessionStorage.setItem("email",payload.email)
             sessionStorage.setItem("role",payload.role)
             sessionStorage.setItem("token",payload.token)
-            return {...state,isLoading:false,isAuth:true,token:payload.token,first_name:payload.first_name,last_name:payload.last_name,email:payload.last_name,role:payload.last_name}
+            sessionStorage.setItem("userid",payload.userId)
+            return {...state,isLoading:false,isAuth:true,token:payload.token,first_name:payload.first_name,last_name:payload.last_name,email:payload.last_name,role:payload.last_name,userId:payload.userId}
         case LOGIN_FAILURE:
             return {...state,isLoading:false,isError:true}
         case LOGOUT:

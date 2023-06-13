@@ -3,6 +3,7 @@ const cors=require("cors")
 const { connection } = require("./db")
 const { userRouter } = require("./routes/userRoutes")
 const { productRouter } = require("./routes/productRoutes")
+const { cartRouter } = require("./routes/cartRoutes")
 require("dotenv").config()
 
 
@@ -12,6 +13,7 @@ app.use(cors())
 
 app.use("/user",userRouter)
 app.use("/products",productRouter)
+app.use("/cart",cartRouter)
 
 
 app.listen(process.env.port,async()=>{
