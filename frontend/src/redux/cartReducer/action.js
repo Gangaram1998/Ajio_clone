@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CART_GET_FAILURE, CART_GET_REQUEST, CART_POST_FAILURE, CART_POST_REQUEST, CART_POST_SUCCESS } from "./actionTypes"
+import { CART_DELETE_FAILURE, CART_DELETE_REQUEST, CART_DELETE_SUCCESS, CART_GET_FAILURE, CART_GET_REQUEST, CART_GET_SUCCESS, CART_PATCH_FAILURE, CART_PATCH_REQUEST, CART_POST_FAILURE, CART_POST_REQUEST, CART_POST_SUCCESS } from "./actionTypes"
 
 export const  AddtoCart=(obj,token)=>async(dispatch)=>{
     dispatch({type:CART_POST_REQUEST})
@@ -14,14 +14,43 @@ export const  AddtoCart=(obj,token)=>async(dispatch)=>{
     }
 }
 
-export const GetCardData=(obj,token)=>async(dispatch)=>{
+export const GetCardData=(userId,token)=>async(dispatch)=>{
     dispatch({type:CART_GET_REQUEST})
     try{
-        let res=await axios.get(`http://localhost:4500/cart/getcart`,obj,{headers:{
-            Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgzMmQxODU0YjZhNzY2NGQ1YjBmZTYiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTY4NjY1Njg1Mn0.2sXOBO8F2nS-QAE4CtAEUQnqxJh4r-cyJdvoySrSCgc"
+        let res=await axios.get(`http://localhost:4500/cart/getcart/${userId}`,{headers:{
+            Authorization:token
         }})
-        console.log(res)
+        dispatch({type:CART_GET_SUCCESS,payload:res.data})
     }catch(err){
         dispatch({type:CART_GET_FAILURE})
+    }
+}
+
+export const DeleteCartItem=(id,token)=>async(dispatch)=>{
+    dispatch({type:CART_DELETE_REQUEST})
+    try{
+        await axios.delete(`http://localhost:4500/cart/delete/${id}`,{
+            headers:{
+                Authorization:token
+            }
+        })
+        dispatch({type:CART_DELETE_SUCCESS})
+    }catch(err){
+        dispatch({type:CART_DELETE_FAILURE})
+    }
+}
+
+export const UpdateCart=(id,obj,token)=>async(dispatch)=>{
+
+    dispatch({type:CART_PATCH_REQUEST})
+    try{
+        const res=await axios.patch(`http://localhost:4500/cart/update/${id}`,obj,{
+            headers:{
+                Authorization:token
+            }
+        })
+        console.log(res)
+    }catch(err){
+        dispatch({type:CART_PATCH_FAILURE})
     }
 }

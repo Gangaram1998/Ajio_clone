@@ -194,7 +194,7 @@ const ProductPage = () => {
                     </Box>
                     <Grid templateColumns={{base:'repeat(1,1fr)',md:'repeat(2,1fr)',lg:`repeat(${grid}, 1fr)`}} gap={6}>
                         {
-                            data.length>0 && data.map((el)=><ProductCard key={el._id} image={el.image} brand={el.brand} name={el.name} price={el.price} discount={el.discount} id={el._id} />)
+                            data?.map((el)=><ProductCard key={el._id} image={el.image} brand={el.brand} name={el.name} price={el.price} discount={el.discount} id={el._id} />)
                         }
                     </Grid>
                     <Paginantion page={page} setPage={setPage} total={total}/>

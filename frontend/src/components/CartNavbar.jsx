@@ -1,4 +1,4 @@
-import { Box, Flex, Image, VStack, Text, HStack, Input, InputGroup, Icon, InputRightElement } from '@chakra-ui/react'
+import { Box, Flex, Image, VStack, Text, HStack,  Icon } from '@chakra-ui/react'
 import { Divider } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { BsBag } from "react-icons/bs"
@@ -8,7 +8,7 @@ import { LogoutAction } from '../redux/authReducer/action'
 import {CiLocationOn} from "react-icons/ci"
 import {FaRupeeSign} from "react-icons/fa"
 
-const CartNavbar = ({onOpen}) => {
+const CartNavbar = () => {
     const dispatch=useDispatch()
     const [menuopen, setMenuopen] = useState(false)
     const navigate=useNavigate()
