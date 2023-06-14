@@ -44,11 +44,11 @@ const getProduct=async(req,res)=>{
 }
 
 const addProduct=async(req,res)=>{
-    const {image,brand,gender,name,price,originalPrice,category,quantity}=req.body
+    const {image,brand,name,price,category,quantity}=req.body
     const token=req.headers.authorization
     try{
         const decoded= jwt.verify(token,process.env.Secretkey)
-       const product=new ProductModel({image,brand,gender,name,price,originalPrice,category,quantity,adminId:decoded.userId})
+       const product=new ProductModel({image,brand,name,price,category,quantity,adminId:decoded.userId})
        await product.save()
        res.send({
         message:"Product added successfully!",

@@ -44,11 +44,12 @@ const SingleProductPage = () => {
                 name: product.name,
                 price: product.price,
                 quantity: 1,
-                userId: product.userId
+                userId: product.userId,
+                originalPrice:product.price
             }
             dispatch(AddtoCart(obj, token))
                 .then((res) => {
-                    if (res == 200) {
+                    if (res === 200) {
                         toast({
                             title: 'cart',
                             description: "Successfully added to cart",

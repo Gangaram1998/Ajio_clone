@@ -9,6 +9,10 @@ const cartSchema=new mongoose.Schema({
         required:true,
         type:String
     },
+    originalPrice:{
+        type:Number,
+        required:true
+    },
     image:{
         type:String,
         required:true
@@ -18,7 +22,7 @@ const cartSchema=new mongoose.Schema({
         required:true
     },
     price:{
-        type:String,
+        type:Number,
         required:true
     },
     userId:{
