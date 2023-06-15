@@ -1,8 +1,68 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AdminSidebar from '../Components/AdminSidebar'
-import { Box, Button, FormControl, FormLabel, HStack, Input, Text } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, HStack, Input, Text, useToast } from '@chakra-ui/react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addProduct } from '../../redux/getdataReducer/action'
 
 export const Addproducts = () => {
+    const [image,setImage]=useState("")
+    const [brand,setBrand]=useState("")
+    const [name,setName]=useState("")
+    const [price,setPrice]=useState("")
+    const [category,setCategory]=useState("")
+    const [quantity,setQuantity]=useState(1)
+    const toast=useToast()
+    const dispatch=useDispatch()
+    const {token}=useSelector((store)=>store.authReducer)
+
+
+    const handleSubmit=()=>{
+        if(image==="" || name===""|| brand==="" || price==="" || category==="" || quantity===""){
+            return toast({
+                message:"Empty",
+                status:"error",
+                description:"fill all details",
+                duration:6000,
+                isClosable:true
+            })
+        }   
+        const obj={
+            image,
+            name,
+            price,
+            brand,
+            category,
+            quantity
+        }
+        dispatch(addProduct(obj,token))
+        .then((res)=>{
+            console.log(res)
+            if(res.status===200){
+                return toast({
+                    title:"Add",
+                    description:"product added successfully",
+                    status:"success",
+                    duration:6000,
+                    isClosable:true
+                })
+            }
+            else{
+                return toast({
+                    title:"Add",
+                    description:"product added failed",
+                    status:"error",
+                    duration:6000,
+                    isClosable:true
+                })
+            }
+            setImage("")
+            setBrand("")
+            setName("")
+            setPrice("")
+            setCategory("")
+            setQuantity(1)
+        })
+    }
     return (
         <>
             <HStack>
@@ -13,41 +73,41 @@ export const Addproducts = () => {
                         <FormControl>
                             <FormLabel>
                                 Image:
-                                <Input/>
+                                <Input onChange={(e)=>setImage(e.target.value)}/>
                             </FormLabel>
                         </FormControl>
                         <FormControl>
                             <FormLabel>
                                 Brand:
-                                <Input/>
+                                <Input onChange={(e)=>setBrand(e.target.value)}/>
                             </FormLabel>
                         </FormControl>
                         <FormControl>
                             <FormLabel>
                                 Name:
-                                <Input/>
+                                <Input onChange={(e)=>setName(e.target.value)}/>
                             </FormLabel>
                         </FormControl>
                         <FormControl>
                             <FormLabel>
                                 Price:
-                                <Input/>
+                                <Input onChange={(e)=>setPrice(e.target.value)}/>
                             </FormLabel>
                         </FormControl>
                         <FormControl>
                             <FormLabel>
                                 Category:
-                                <Input/>
+                                <Input onChange={(e)=>setCategory(e.target.value)}/>
                             </FormLabel>
                         </FormControl>
                         <FormControl>
                             <FormLabel>
                                 Quantity:
-                                <Input/>
+                                <Input onChange={(e)=>setQuantity(e.target.value)}/>
                             </FormLabel>
                         </FormControl>
                         <FormControl>
-                            <Button padding={"10px 40px"} bg={"orange"} color={"white"}>Submit</Button>
+                            <Button padding={"10px 40px"} bg={"orange"} color={"white"} onClick={handleSubmit}>Submit</Button>
                         </FormControl>
                     </Box>
                 </Box>

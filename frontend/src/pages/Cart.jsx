@@ -5,16 +5,20 @@ import CartComponent from '../components/CartComponent'
 import { Button } from '@chakra-ui/button'
 import { DeleteCartItem, GetCardData, UpdateCart } from '../redux/cartReducer/action'
 import { useDispatch, useSelector } from 'react-redux'
-import { useDisclosure, useToast } from '@chakra-ui/react'
+import { Spinner, useDisclosure, useToast } from '@chakra-ui/react'
 import { AddressNPayment } from '../components/Address&Payment'
+import { AddOrder } from '../redux/orderReducer/action'
+
+
 
 export const Cart = () => {
     const dispatch = useDispatch()
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen: isaddress, onOpen: addressOpen, onClose: addressClose } = useDisclosure()
     const { userId, token } = useSelector((store) => store.authReducer)
     const { cartData, total, totalPrice } = useSelector((store) => store.cartReducer)
     const [change, setChange] = useState(false)
     const toast = useToast()
+
 
 
     const [state, setState] = useState("")
@@ -25,7 +29,9 @@ export const Cart = () => {
     const [payment, setPayment] = useState("")
 
 
-    const hanldeAddress = () => {
+
+
+    const hanldeAddress = async () => {
         if (state === "" || dist === "" || pin === null || houseno === null || mb === null) {
             return toast({
                 title: "ERROR",
@@ -51,12 +57,61 @@ export const Cart = () => {
                 pin_code: pin,
                 house_number: houseno
             },
-            mobile_number: mb,
+            mobile_number: Number(mb),
             products: [
                 ...cartData
             ]
         }
-        onClose()
+        addressClose()
+        dispatch(AddOrder(obj, token))
+            .then((res) => {
+                console.log(res.status)
+                if (res.status === 200) {
+                    toast({
+                        status: "success",
+                        duration: 3000,
+                        isClosable: true,
+                    render: () => (
+                            <Box
+                                bg="green.500"
+                                color="white"
+                                borderRadius="md"
+                                padding={4}
+                                width="300px"
+                                
+                                
+                            >
+                                <Spinner/>
+                                <strong>Order</strong>
+                                <p>Order Placed Successfully</p>
+                            </Box>
+                        ),
+                    })
+                    setChange(prev => !prev)
+                }
+                else{
+                    toast({
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                    render: () => (
+                            <Box
+                                bg="green.500"
+                                color="white"
+                                borderRadius="md"
+                                padding={4}
+                                width="300px"
+                                
+                            >   
+                            <Spinner />
+                                <strong>Order</strong>
+                                <p>Order Failed</p>
+                            </Box>
+                        ),
+                    })
+                }
+            })
+
     }
 
 
@@ -115,7 +170,7 @@ export const Cart = () => {
                                     duration: 9000
                                 })
                             };
-                            onOpen()
+                            addressOpen()
                         }}
                         >PROCEED TO SHIPPING</Button>
                     </Box>
@@ -124,7 +179,7 @@ export const Cart = () => {
                         <Text width={"100%"}>In case of return, we ensure quick refunds. Full amount will be refunded excluding Convenience Fee</Text>
                     </Box>
                 </VStack>
-                <AddressNPayment isOpen={isOpen} onClose={onClose} setState={setState} setDist={setDist} setHouseno={setHouseno} setPin={setPin} setMb={setMb} handleAddress={hanldeAddress} payment={payment} setPayment={setPayment} />
+                <AddressNPayment isOpen={isaddress} onClose={addressClose} setState={setState} setDist={setDist} setHouseno={setHouseno} setPin={setPin} setMb={setMb} handleAddress={hanldeAddress} payment={payment} setPayment={setPayment} />
             </HStack>
         </>
     )

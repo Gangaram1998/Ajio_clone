@@ -1,4 +1,4 @@
-import { GET_FAILURE, GET_REQUEST, GET_SUCCESS } from "./actionType"
+import { DELETE_FAILURE, DELETE_REQUEST, DELETE_SUCCESS, GET_FAILURE, GET_REQUEST, GET_SUCCESS, POST_FAILURE, POST_REQUEST, POST_SUCCESS } from "./actionType"
 const initialState={
     isLoading:false,
     isError:false,
@@ -13,6 +13,18 @@ export const reducer=(state=initialState,{type,payload})=>{
         case GET_SUCCESS:
             return {...state,isLoading:false,data:payload.products,total:payload.total}
         case GET_FAILURE:
+            return {...state,isLoading:false,isError:true}
+        case DELETE_REQUEST:
+            return {...state,isLoading:true}
+        case DELETE_SUCCESS:
+            return {...state,isLoading:false}
+        case DELETE_FAILURE:
+            return {...state,isLoading:false,isError:true}
+        case POST_REQUEST:
+            return {...state,isLoading:true}
+        case POST_SUCCESS:
+            return {...state,isLoading:false}
+        case POST_FAILURE:
             return {...state,isLoading:false,isError:true}
         default:
             return state
