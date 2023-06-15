@@ -103,9 +103,31 @@ const DeleteProduct=async(req,res)=>{
     }
 }
 
+
+const UpdateProduct=async(req,res)=>{
+    const _id=req.params.id
+    try{
+        await ProductModel.findByIdAndUpdate(_id)
+        res.send({
+            message:"product updated Succefully",
+            err:false,
+            status:200
+        })
+        
+    }catch(err){
+        res.send({
+            message:"Something went wrong",
+            err,
+            err:true,
+            stateus:400
+        })
+    }
+}
+
 module.exports={
     getProduct,
     addProduct,
     singleProduct,
-    DeleteProduct
+    DeleteProduct,
+    UpdateProduct
 }
