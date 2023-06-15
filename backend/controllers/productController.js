@@ -53,7 +53,8 @@ const addProduct=async(req,res)=>{
        res.send({
         message:"Product added successfully!",
         err:false,
-        product
+        product,
+        status:200
        })
     }catch(err){
         res.send({
@@ -83,8 +84,28 @@ const singleProduct=async(req,res)=>{
     }
 }
 
+const DeleteProduct=async(req,res)=>{
+    const _id=req.params.id
+    try{
+        await ProductModel.findByIdAndDelete(_id)
+        res.send({
+            message:"product deleted Succefully",
+            err:false,
+            status:200
+        })
+    }catch(err){
+        res.send({
+            message:"Something went wrong",
+            err,
+            err:true,
+            stateus:400
+        })
+    }
+}
+
 module.exports={
     getProduct,
     addProduct,
-    singleProduct
+    singleProduct,
+    DeleteProduct
 }
