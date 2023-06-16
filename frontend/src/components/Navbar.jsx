@@ -18,7 +18,7 @@ const Navbar = ({ onOpen }) => {
     const { isAuth, role } = useSelector((store) => store.authReducer)
     return (
         <>
-            <Box >
+            <Box bg={"white"} zIndex={1}>
                 <Flex height={"85px"} textAlign={"center"} pb={4} display={{ base: "none", md: "flex" }} boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" position={"fixed"} overflow={"hidden"} top={0} left={0} right={0} zIndex={1} bg={"white"}>
                     <Box width={"10%"} marginLeft={"11%"} onClick={() => navigate("/")} >
                         <Image src='https://assets.ajio.com/static/img/Ajio-Logo.svg' alt="logo" mt={"12px"} />
