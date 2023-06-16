@@ -88,7 +88,7 @@ const Navbar = ({ onOpen }) => {
                                     <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} _hover={{ color: "black", fontWeight: "700" }}>INDIE</Text>
                                     <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} _hover={{ color: "black", fontWeight: "700" }}>HOME AND KITCHEN</Text>
                                     <InputGroup width={"25%"} >
-                                        <Input type="text" placeholder="Search AJIO" h={"26px"} border={"1px solid black"} borderRadius={"13px"} color={"gray.600"} focusBorderColor='black' p={1} fontSize={{ md: "10px", lg: "14px", xl: "16px" }}  onFocus={handleInputfocus} onBlur={handleInputblur} onChange={(e)=>setq(e.target.value)}/>
+                                        <Input type="text" placeholder="Search AJIO" h={"26px"} border={"1px solid black"} borderRadius={"13px"} color={"gray.600"} focusBorderColor='black' p={1} fontSize={{ md: "10px", lg: "14px", xl: "16px" }}  onFocus={handleInputfocus}  onChange={(e)=>setq(e.target.value)}/>
                                         <InputRightElement h={"20px"}>
                                             <Icon as={SearchIcon} color="gray.600" mt={1} fontSize={{ md: "10px", lg: "14px", xl: "16px" }} />
                                         </InputRightElement >

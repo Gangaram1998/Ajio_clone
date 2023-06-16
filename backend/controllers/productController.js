@@ -167,7 +167,7 @@
             },
             {
                 $facet: {
-                data: [ { $limit: 8 }],
+                data: [ { $limit: 6 }],
                 count: [{ $count: "total" }],
                 },
             },
