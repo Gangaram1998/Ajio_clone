@@ -12,6 +12,7 @@ import { Orders } from '../Admin/Pages/Orders'
 import { Addproducts } from '../Admin/Pages/Addproducts'
 import { Products } from '../Admin/Pages/Products'
 import { EditProduct } from '../Admin/Components/EditProduct'
+import { Users } from '../Admin/Pages/Users'
 
 
 export const AllRoutes = () => {
@@ -29,6 +30,7 @@ export const AllRoutes = () => {
         <Route path='/admin/addproducts' element={<Addproducts/>} />
         <Route path='/admin/orders' element={<Orders/>} />
         <Route path='/admin/products/:id' element={<EditProduct/>} />
+        <Route path='/admin/users' element={<Users/>}/>
     </Routes>
   )
 }
