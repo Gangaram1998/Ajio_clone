@@ -79,7 +79,7 @@ const SingleProductPage = () => {
 
     useEffect(() => {
         dispatch(GetSingleProduct(id))
-    }, [])
+    }, [id])
 
     if (isLoading) {
         return <Skeleton />
