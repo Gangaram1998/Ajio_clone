@@ -57,3 +57,4 @@ export const updateProduct=(id,obj,token)=>async(dispatch)=>{
         dispatch({type:DELETE_FAILURE})
     }
 }
+
