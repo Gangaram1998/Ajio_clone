@@ -10,7 +10,7 @@
             minDiscount,
             maxDiscount,
             page,
-            order,
+            order
         } = req.query;
         const categoryFilter = category ? { category: category } : {};
         if (order === "desc") {
@@ -179,7 +179,7 @@
                 message: "Query successful",
                 status: 1,
                 data: data,
-                count: count,
+                total: count,
                 error: false,
                 });
             })
