@@ -1,8 +1,7 @@
 import { Box, useDisclosure } from '@chakra-ui/react';
 import './App.css';
-import Navbar from './components/Navbar';
 import { AllRoutes } from './routes/AllRoutes';
-import Sidebar from './components/Sidebar';
+import Searchpage from './components/Searchpage';
 
 
 function App() {

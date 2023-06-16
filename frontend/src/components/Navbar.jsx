@@ -1,15 +1,18 @@
 import { Box, Flex, Image, VStack, Text, HStack, Input, InputGroup, Icon, InputRightElement } from '@chakra-ui/react'
 import { Divider } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HamburgerIcon, SearchIcon } from "@chakra-ui/icons"
 import { AiOutlineHeart, } from "react-icons/ai"
 import { BsBag } from "react-icons/bs"
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import Menu from './Menu'
 import { useDispatch, useSelector } from 'react-redux'
 import { LogoutAction } from '../redux/authReducer/action'
+import Searchpage from './Searchpage'
+import { SearchProduct } from '../redux/searchReducer/action'
 
 const Navbar = ({ onOpen }) => {
+    const [searchparams,setSearchparams]=useSearchParams()
     const dispatch = useDispatch()
     const [menuopen, setMenuopen] = useState(false)
     const navigate = useNavigate()
@@ -17,6 +20,25 @@ const Navbar = ({ onOpen }) => {
     const [showmenu, setShowmenu] = useState(false)
     const { isAuth, role } = useSelector((store) => store.authReducer)
     const location=useLocation()
+    const [display,setDisplay]=useState(false)
+    const [q,setq]=useState("")
+    const handleInputfocus=()=>{
+        setDisplay(true)
+    }
+    const handleInputblur=()=>{
+        setDisplay(false)
+    }
+
+    let obj={
+        params:{
+            q:q
+        }
+    }
+    useEffect(()=>{
+        dispatch(SearchProduct(obj))
+    },[q])
+
+
     return (
         <>
             <Box bg={"white"} zIndex={1}>
@@ -66,7 +88,7 @@ const Navbar = ({ onOpen }) => {
                                     <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} _hover={{ color: "black", fontWeight: "700" }}>INDIE</Text>
                                     <Text fontSize={{ md: "10px", lg: "13px", xl: "15px" }} color={"gray.600"} fontFamily={"SourceSansPro"} _hover={{ color: "black", fontWeight: "700" }}>HOME AND KITCHEN</Text>
                                     <InputGroup width={"25%"} >
-                                        <Input type="text" placeholder="Search AJIO" h={"26px"} border={"1px solid black"} borderRadius={"13px"} color={"gray.600"} focusBorderColor='black' p={1} fontSize={{ md: "10px", lg: "14px", xl: "16px" }} />
+                                        <Input type="text" placeholder="Search AJIO" h={"26px"} border={"1px solid black"} borderRadius={"13px"} color={"gray.600"} focusBorderColor='black' p={1} fontSize={{ md: "10px", lg: "14px", xl: "16px" }}  onFocus={handleInputfocus} onBlur={handleInputblur} onChange={(e)=>setq(e.target.value)}/>
                                         <InputRightElement h={"20px"}>
                                             <Icon as={SearchIcon} color="gray.600" mt={1} fontSize={{ md: "10px", lg: "14px", xl: "16px" }} />
                                         </InputRightElement >
@@ -100,6 +122,7 @@ const Navbar = ({ onOpen }) => {
                 </HStack>
             </Box>
             <Menu menu={menu} showmenu={showmenu} setmenu={setmenu} setShowmenu={setShowmenu} />
+            <Searchpage display={display}/>
         </>
     )
 }
