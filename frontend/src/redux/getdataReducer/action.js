@@ -15,7 +15,7 @@ export const GetData=(obj)=>async(dispatch)=>{
 export const deleteProduct=(id,token)=>async(dispatch)=>{
     dispatch({type:DELETE_REQUEST})
     try{
-        const res=await axios.delete(`http://localhost:4500/products/${id}`,{
+        const res=await axios.delete(`http://localhost:4500/products/delete/${id}`,{
             headers:{
                 Authorization:token
             }
@@ -39,5 +39,21 @@ export const addProduct=(obj,token)=>async(dispatch)=>{
         return {status:res.data.status}
     }catch(err){
         dispatch({type:POST_FAILURE})
+    }
+}
+
+
+export const updateProduct=(id,obj,token)=>async(dispatch)=>{
+    dispatch({type:DELETE_REQUEST})
+    try{
+        const res=await axios.patch(`http://localhost:4500/products/update/${id}`,obj,{
+            headers:{
+                Authorization:token
+            }
+        })
+        dispatch({type:DELETE_SUCCESS})
+        return {status:res.data.status}
+    }catch(err){
+        dispatch({type:DELETE_FAILURE})
     }
 }

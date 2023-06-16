@@ -72,7 +72,9 @@ const ProductPage = () => {
         setSearchparams(params)
     },[minPrice,maxPrice,minDiscount,maxDiscount,order,maincategory,page])
 
-    let obj={
+    
+    useEffect(()=>{
+        let obj={
         params:{
             minPrice:searchparams.get("minPrice"),
             maxPrice:searchparams.get("maxPrice"),
@@ -83,7 +85,6 @@ const ProductPage = () => {
             category:maincategory
         }
     }
-    useEffect(()=>{
         dispatch(GetData(obj))
     },[location.search])
 

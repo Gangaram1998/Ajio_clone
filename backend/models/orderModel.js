@@ -30,6 +30,11 @@ const orderSchema=new mongoose.Schema({
     userId:{
         type:String,
         required:true
+    },
+    status:{
+        type:Boolean,
+        required:true,
+        default:false
     }
 },{
     versionKey:false,
