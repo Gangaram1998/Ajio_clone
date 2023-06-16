@@ -25,7 +25,30 @@ const { CartModel } = require("../models/cartModel")
     }
 }
 
+getOrders=async(req,res)=>{
+    const {page}=req.query
+    const skip=(page-1)*10
+    try{
+        const orders=await OrderModel.find().skip(skip).limit(10)
+        const Totalorders=await OrderModel.find({}).countDocuments()
+        res.send({
+            status:200,
+            err:false,
+            orders,
+            Totalorders
+        })
+    }catch(err){
+        res.send({
+            message:"something went wrong",
+            status:400,
+            err:true,
+            err
+        })
+    }
+}
+
 
 module.exports={
-    orderProduct
+    orderProduct,
+    getOrders
 }

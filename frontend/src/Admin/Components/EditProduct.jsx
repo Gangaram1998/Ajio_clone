@@ -34,7 +34,8 @@ export const EditProduct = () => {
             category,
             quantity
         }
-        dispatch(updateProduct(id,obj,token))
+        dispatch(updateProduct(obj,token))
+        
         .then((res)=>{
             if (res.status === 200) {
                 navigate(location.pathname,{replace:true})
@@ -60,6 +61,7 @@ export const EditProduct = () => {
         })
     }
     useEffect(()=>{
+        
         dispatch(GetSingleProduct(id))
         .then(()=>{
             setImage(product.image)
@@ -70,7 +72,7 @@ export const EditProduct = () => {
             setQuantity(product.quantity)
         })
 
-    },[])
+    },[dispatch,id,product])
     return (
         <>
             <HStack>
