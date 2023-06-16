@@ -22,6 +22,7 @@ const SingleProductPage = () => {
     const { product, isLoading } = useSelector((store) => {
         return store.singleproductReducer
     })
+    const {userId}=useSelector((store)=>store.authReducer)
 
 
     const { id } = useParams()
@@ -45,7 +46,7 @@ const SingleProductPage = () => {
                 name: product.name,
                 price: product.price,
                 quantity: 1,
-                userId: product.userId,
+                userId: userId,
                 originalPrice: product.price
             }
             if (isAuth) {
