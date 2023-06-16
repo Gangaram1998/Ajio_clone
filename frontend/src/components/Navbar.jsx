@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { HamburgerIcon, SearchIcon } from "@chakra-ui/icons"
 import { AiOutlineHeart, } from "react-icons/ai"
 import { BsBag } from "react-icons/bs"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Menu from './Menu'
 import { useDispatch, useSelector } from 'react-redux'
 import { LogoutAction } from '../redux/authReducer/action'
@@ -16,6 +16,7 @@ const Navbar = ({ onOpen }) => {
     const [menu, setmenu] = useState("")
     const [showmenu, setShowmenu] = useState(false)
     const { isAuth, role } = useSelector((store) => store.authReducer)
+    const location=useLocation()
     return (
         <>
             <Box bg={"white"} zIndex={1}>
@@ -43,7 +44,7 @@ const Navbar = ({ onOpen }) => {
                                     {!isAuth ? <Text fontSize={"14px"} fontFamily={"SourceSansPro"} _hover={{
                                         transform: "scale(1.2)",
                                         transition: "transform 0.2s ease-in-out",
-                                    }} onClick={() => navigate("/login")}>Login</Text> :
+                                    }} onClick={() => navigate("/login",{state:{from:location.pathname}})}>Login</Text> :
                                         <Text fontSize={"14px"} fontFamily={"SourceSansPro"} _hover={{
                                             transform: "scale(1.2)",
                                             transition: "transform 0.2s ease-in-out",

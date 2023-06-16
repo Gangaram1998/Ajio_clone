@@ -14,7 +14,6 @@ import { Products } from '../Admin/Pages/Products'
 import { EditProduct } from '../Admin/Components/EditProduct'
 import { Users } from '../Admin/Pages/Users'
 import PrivateRoute from './PrivateRoutes'
-import SuperAdminRoutes from './SuperAdminRoutes'
 import AdminRoutes from './AdminRoutes'
 
 
@@ -28,7 +27,7 @@ export const AllRoutes = () => {
         <Route path='/' element={<HomePage/>}/>
         <Route path='/singleproductpage/:id' element={<SingleProductPage/>}/>
         <Route path='/admin/dashboard' element={<AdminRoutes><Dashoard/></AdminRoutes>} />
-        <Route path='/admin/admins' element={<SuperAdminRoutes><Admins/></SuperAdminRoutes>} />
+        <Route path='/admin/admins' element={<AdminRoutes><Admins/></AdminRoutes>} />
         <Route path='/admin/products' element={<AdminRoutes><Products/></AdminRoutes>} />
         <Route path='/admin/addproducts' element={<AdminRoutes><Addproducts/></AdminRoutes>} />
         <Route path='/admin/orders' element={<AdminRoutes><Orders/></AdminRoutes>} />
