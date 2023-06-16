@@ -3,7 +3,7 @@ import React from 'react'
 
 export const UserComp = ({firstname,lastname}) => {
   return (
-    <Box bg={"green.100"} width={"80%"} height={"150px"} display={"flex"} alignItems={"center"}>
+    <Box bg={"green.100"} width={"80%"} height={"120px"} display={"flex"} alignItems={"center"}>
         <Box width={"15%"} height={"100%"}  >
                 <Image bg={"green"} ml={"20px"} width={"70%"} height={"90%"} mt={"5px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0m5Cy4lXCbuyG54L0vuo3i5-ALavHe9KmhWA_wDM&s"}/>
             </Box>

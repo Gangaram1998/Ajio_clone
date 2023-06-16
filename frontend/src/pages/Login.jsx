@@ -1,5 +1,5 @@
 import { Box, FormControl, FormLabel, Button, Input, VStack, Text, Divider, Image, Checkbox, useToast } from "@chakra-ui/react"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import google from "../assets/google.png"
 import { useLocation, useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
@@ -12,7 +12,6 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const location=useLocation()
-    const state = useSelector((store) => store.authReducer)
     const toast = useToast()
 
 
@@ -27,6 +26,7 @@ const Login = () => {
         dispatch(LoginAction(userData))
         .then((res)=>{
             if(res==200){
+                navigate(location.state.from)
                 toast({
                 title: 'Login',
                 description: "please successful!",
@@ -38,18 +38,18 @@ const Login = () => {
             else{
                 toast({
                     title: 'Login',
-                    description: "please failed!",
+                    description: "login failed!",
                     status: 'error',
                     duration: 3000,
                     isClosable: true,
                     })
             }
+            
         })
 
         setEmail("")
         setPassword("")
     }
-
     return (
         <>
         <Navbar/>

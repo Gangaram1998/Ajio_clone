@@ -2,7 +2,7 @@ import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 import { Box, Button, Image, Skeleton, Text, useToast, } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router'
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router'
 import { GetSingleProduct } from '../redux/singleProuductReducer/action'
 import Navbar from '../components/Navbar'
 import { AddtoCart } from '../redux/cartReducer/action'
@@ -11,6 +11,7 @@ import { AddtoCart } from '../redux/cartReducer/action'
 const SingleProductPage = () => {
     const [returns, setReturns] = useState(true)
     const [promise, setPromise] = useState(false)
+    const location=useLocation()
     const toast = useToast()
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -45,20 +46,23 @@ const SingleProductPage = () => {
                 price: product.price,
                 quantity: 1,
                 userId: product.userId,
-                originalPrice:product.price
+                originalPrice: product.price
             }
-            dispatch(AddtoCart(obj, token))
-                .then((res) => {
-                    if (res === 200) {
-                        toast({
-                            title: 'cart',
-                            description: "Successfully added to cart",
-                            status: 'success',
-                            duration: 3000,
-                            isClosable: true,
-                        })
-                    }
-                })
+            if (isAuth) {
+                dispatch(AddtoCart(obj, token))
+                    .then((res) => {
+                        if (res === 200) {
+                            toast({
+                                title: 'cart',
+                                description: "Successfully added to cart",
+                                status: 'success',
+                                duration: 3000,
+                                isClosable: true,
+                            })
+                        }
+                    })
+            }
+
         }
         else {
             toast({
@@ -68,7 +72,7 @@ const SingleProductPage = () => {
                 duration: 3000,
                 isClosable: true,
             })
-            navigate("/login", { replace: true })
+            navigate("/login", {state:{from:location.pathname}},{ replace: true })
         }
     }
 
