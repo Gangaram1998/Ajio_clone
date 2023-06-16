@@ -45,20 +45,26 @@ const SingleProductPage = () => {
                 price: product.price,
                 quantity: 1,
                 userId: product.userId,
-                originalPrice:product.price
+                originalPrice: product.price
             }
-            dispatch(AddtoCart(obj, token))
-                .then((res) => {
-                    if (res === 200) {
-                        toast({
-                            title: 'cart',
-                            description: "Successfully added to cart",
-                            status: 'success',
-                            duration: 3000,
-                            isClosable: true,
-                        })
-                    }
-                })
+            if (isAuth) {
+                dispatch(AddtoCart(obj, token))
+                    .then((res) => {
+                        if (res === 200) {
+                            toast({
+                                title: 'cart',
+                                description: "Successfully added to cart",
+                                status: 'success',
+                                duration: 3000,
+                                isClosable: true,
+                            })
+                        }
+                    })
+            }
+            else{
+                navigate('/login', {replace:true})
+            }
+
         }
         else {
             toast({
