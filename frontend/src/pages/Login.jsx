@@ -25,7 +25,6 @@ const Login = () => {
 
         dispatch(LoginAction(userData))
         .then((res)=>{
-            window.location.reload();
             if(res==200){
                 navigate(location.state.from)
                 toast({
@@ -47,6 +46,7 @@ const Login = () => {
             }
             
         })
+        
 
         setEmail("")
         setPassword("")
