@@ -2,6 +2,7 @@ import { Box, Image, Button, Text } from '@chakra-ui/react'
 import React from 'react'
 
 const OrderComp = ({status,userId,length}) => {
+    console.log(length)
     return (
         <Box bg={"green.100"} width={"80%"} height={"100px"} display={"flex"} justifyContent={"space-around"} alignItems={"center"}>
             <Box width={"70%"} height={"100%"} display={"flex"} alignItems={"center"} >

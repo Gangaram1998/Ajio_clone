@@ -15,7 +15,7 @@ export const Addproducts = () => {
     const dispatch=useDispatch()
     const {token}=useSelector((store)=>store.authReducer)
 
-
+console.log(token)
     const handleSubmit=()=>{
         if(image==="" || name===""|| brand==="" || price==="" || category==="" || quantity===""){
             return toast({
@@ -62,6 +62,7 @@ export const Addproducts = () => {
             setCategory("")
             setQuantity(1)
         })
+        
     }
     return (
         <>

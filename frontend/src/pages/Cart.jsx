@@ -96,7 +96,7 @@ export const Cart = () => {
                         isClosable: true,
                     render: () => (
                             <Box
-                                bg="green.500"
+                                bg="red.500"
                                 color="white"
                                 borderRadius="md"
                                 padding={4}
@@ -127,7 +127,9 @@ export const Cart = () => {
 
     const handleDelete = (id) => {
         dispatch(DeleteCartItem(id, token))
-        setChange(prev => !prev)
+        .then((res)=>{
+            setChange(prev => !prev)
+        })
     }
     const handleQuantity = (id, n, p) => {
         let obj = {
@@ -135,7 +137,7 @@ export const Cart = () => {
             p
         }
         dispatch(UpdateCart(id, obj, token))
-        setChange(prev => !prev)
+        .then(()=>setChange(prev => !prev))
     }
 
     useEffect(() => {

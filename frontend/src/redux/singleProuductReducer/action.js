@@ -4,7 +4,7 @@ import { SINGLE_PRODUCT_GET_FAILURE, SINGLE_PRODUCT_GET_REQUEST, SINGLE_PRODUCT_
 export const GetSingleProduct=(id)=>async(dispatch)=>{
     dispatch({type:SINGLE_PRODUCT_GET_REQUEST})
     try{
-        const res=await axios.get(`https://ajio-shop-web.onrender.com/products/singleproduct/${id}`)
+        const res=await axios.get(`https://backend-ajio-web.onrender.com/products/singleproduct/${id}`)
         dispatch({type:SINGLE_PRODUCT_GET_SUCCESS,payload:res.data.product})
     }catch(err){
         dispatch({type:SINGLE_PRODUCT_GET_FAILURE})

@@ -4,7 +4,7 @@ import { CART_DELETE_FAILURE, CART_DELETE_REQUEST, CART_DELETE_SUCCESS, CART_GET
 export const  AddtoCart=(obj,token)=>async(dispatch)=>{
     dispatch({type:CART_POST_REQUEST})
     try{
-        const res=await axios.post("https://ajio-shop-web.onrender.com/cart/addproduct",obj,{headers:{
+        const res=await axios.post("https://backend-ajio-web.onrender.com/cart/addproduct",obj,{headers:{
             Authorization:token
         }})
         dispatch({type:CART_POST_SUCCESS})
@@ -17,7 +17,7 @@ export const  AddtoCart=(obj,token)=>async(dispatch)=>{
 export const GetCardData=(userId,token)=>async(dispatch)=>{
     dispatch({type:CART_GET_REQUEST})
     try{
-        let res=await axios.get(`https://ajio-shop-web.onrender.com/cart/getcart/${userId}`,{headers:{
+        let res=await axios.get(`https://backend-ajio-web.onrender.com/cart/getcart/${userId}`,{headers:{
             Authorization:token
         }})
         dispatch({type:CART_GET_SUCCESS,payload:res.data})
@@ -29,7 +29,7 @@ export const GetCardData=(userId,token)=>async(dispatch)=>{
 export const DeleteCartItem=(id,token)=>async(dispatch)=>{
     dispatch({type:CART_DELETE_REQUEST})
     try{
-        await axios.delete(`https://ajio-shop-web.onrender.com/cart/delete/${id}`,{
+        await axios.delete(`https://backend-ajio-web.onrender.com/cart/delete/${id}`,{
             headers:{
                 Authorization:token
             }
@@ -44,7 +44,7 @@ export const UpdateCart=(id,obj,token)=>async(dispatch)=>{
 
     dispatch({type:CART_PATCH_REQUEST})
     try{
-        const res=await axios.patch(`https://ajio-shop-web.onrender.com/cart/update/${id}`,obj,{
+        const res=await axios.patch(`https://backend-ajio-web.onrender.com/cart/update/${id}`,obj,{
             headers:{
                 Authorization:token
             }
