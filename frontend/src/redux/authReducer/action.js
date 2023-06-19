@@ -6,7 +6,7 @@ import axios from "axios"
 export const LoginAction=(userData)=>async(dispatch)=>{
     dispatch({type:LOGIN_REQUEST})
     try{
-        const res=await axios.post(`http://localhost:4500/user/login`,userData)
+        const res=await axios.post(`https://ajio-shop-web.onrender.com/user/login`,userData)
         if(res.data.status === 200){
             dispatch({type:LOGIN_SUCCESS,payload:res.data})
             return res.data.status

@@ -1,5 +1,5 @@
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
-import { Text, Box, HStack, VStack, Checkbox, Skeleton, SimpleGrid, Select, Grid, RadioGroup, Radio } from '@chakra-ui/react'
+import { Text, Box, HStack, VStack, Skeleton, SimpleGrid, Select, Grid, RadioGroup, Radio } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams, useSearchParams } from 'react-router-dom'
@@ -122,21 +122,21 @@ const ProductPage = () => {
                         <Box textAlign={"start"} >
                             <Text fontSize={"16px"} fontWeight={"600"} onClick={() => setGen(!gen)}>Gender {!gen ? <AddIcon fontSize={"10px"} ml={"20px"} /> : <MinusIcon fontSize={"10px"} ml={"20px"} />}</Text>
                             <Box display={gen ? "block" : "none"}>
-                                {type == "men" && <><Checkbox value={"men"} >men</Checkbox><br /></>}
-                                {type == "women" && <><Checkbox value={"women"}>women</Checkbox><br /></>}
-                                {type == "kids" && <><Checkbox value={"boy"}>kids</Checkbox><br /></>}
-                                {type == "home_and_kitchen" && <><Checkbox value={"home_and_kitchen"}>Home & Kitchen</Checkbox><br /></>}
+                                {type == "men" && <><Radio value={"men"} >men</Radio><br /></>}
+                                {type == "women" && <><Radio value={"women"}>women</Radio><br /></>}
+                                {type == "kids" && <><Radio value={"boy"}>kids</Radio><br /></>}
+                                {type == "home_and_kitchen" && <><Radio value={"home_and_kitchen"}>Home & Kitchen</Radio><br /></>}
                             </Box>
                             <Text fontSize={"16px"} fontWeight={"600"} onClick={() => setCat(!cat)}>Category{!cat ? <AddIcon fontSize={"10px"} ml={"11px"} /> : <MinusIcon fontSize={"10px"} ml={"11px"} />}</Text>
                             <Box display={cat ? "block" : "none"}>
-                                {type == "women" && <><Checkbox value="saree" >saree</Checkbox><br /></>}
-                                {type == "women" && <><Checkbox value={"shirt-tops-tunics"}  >shirt tops tunics</Checkbox><br /></>}
-                                {type == "women" && <><Checkbox value={"kurta-kurti"}>kurta kurti</Checkbox><br /></>}
-                                {type == "women" && <><Checkbox value={"kurta-suits-sets"}>kurta suits sets</Checkbox><br /></>}
-                                {type == "men" && <><Checkbox value="saree">shirt</Checkbox><br /></>}
-                                {type == "men" && <><Checkbox value={"t-shirt"}>T shirt</Checkbox><br /></>}
-                                {type == "men" && <><Checkbox value={"jeans"}>jeans</Checkbox><br /></>}
-                                {type == "men" && <><Checkbox value={"hoodie"}>Hoodie</Checkbox><br /></>}
+                                {type == "women" && <><Radio value="saree" >saree</Radio><br /></>}
+                                {type == "women" && <><Radio value={"shirt-tops-tunics"}  >shirt tops tunics</Radio><br /></>}
+                                {type == "women" && <><Radio value={"kurta-kurti"}>kurta kurti</Radio><br /></>}
+                                {type == "women" && <><Radio value={"kurta-suits-sets"}>kurta suits sets</Radio><br /></>}
+                                {type == "men" && <><Radio value="saree">shirt</Radio><br /></>}
+                                {type == "men" && <><Radio value={"t-shirt"}>T shirt</Radio><br /></>}
+                                {type == "men" && <><Radio value={"jeans"}>jeans</Radio><br /></>}
+                                {type == "men" && <><Radio value={"hoodie"}>Hoodie</Radio><br /></>}
                             </Box>
                             <Text fontSize={"16px"} fontWeight={"600"} onClick={() => setPr(!pr)}>Price {!pr ? <AddIcon fontSize={"10px"} ml={"38px"} /> : <MinusIcon fontSize={"10px"} ml={"38px"} />}</Text>
                             <Box display={pr ? "block" : "none"}>

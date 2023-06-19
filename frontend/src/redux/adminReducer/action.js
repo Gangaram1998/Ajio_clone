@@ -4,7 +4,7 @@ import { ADMINS_GET_FAILURE, ADMINS_GET_REQUEST, ADMINS_GET_SUCCESS, DASHBOARD_G
 export const Dashboarddata=()=>async(dispatch)=>{
     dispatch({type:DASHBOARD_GET_REQUEST})
     try{
-        const res=await axios.get("http://localhost:4500/admin/dashboard")
+        const res=await axios.get("https://ajio-shop-web.onrender.com/admin/dashboard")
         dispatch({type:DASHBOARD_GET_SUCCESS,payload:res.data})
     }catch(err){
         dispatch({type:DASHBOARD_GET_FAILURE})
@@ -14,7 +14,7 @@ export const Dashboarddata=()=>async(dispatch)=>{
 export const getAdmins=(obj)=>async(dispatch)=>{
     dispatch({type:ADMINS_GET_REQUEST})
     try{
-        const res=await axios.get("http://localhost:4500/admin/getadmins",obj)
+        const res=await axios.get("https://ajio-shop-web.onrender.com/admin/getadmins",obj)
         dispatch({type:ADMINS_GET_SUCCESS,payload:res.data})
     }catch(err){
         dispatch({type:ADMINS_GET_FAILURE})
@@ -25,7 +25,7 @@ export const getAdmins=(obj)=>async(dispatch)=>{
 export const MakeEnable=(id,token)=>async(dispatch)=>{
     dispatch({type:UPDATE_REQUEST})
     try{
-        const res=await axios.patch(`http://localhost:4500/admin/update/${id}`,{role:"admin"},{
+        const res=await axios.patch(`https://ajio-shop-web.onrender.com/admin/update/${id}`,{role:"admin"},{
             headers:{
                 Authorization:token
             }
@@ -39,7 +39,7 @@ export const MakeEnable=(id,token)=>async(dispatch)=>{
 export const MakeDisable=(id,token)=>async(dispatch)=>{
     dispatch({type:UPDATE_REQUEST})
     try{
-        const res=await axios.patch(`http://localhost:4500/admin/update/${id}`,{role:"disable"},{
+        const res=await axios.patch(`https://ajio-shop-web.onrender.com/admin/update/${id}`,{role:"disable"},{
             headers:{
                 Authorization:token
             }

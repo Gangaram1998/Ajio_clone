@@ -4,7 +4,7 @@ import { ORDER_GET_FAILURE, ORDER_GET_REQUEST, ORDER_GET_SUCCESS, ORDER_POST_FAI
 export const AddOrder=(obj,token)=>async(dispatch)=>{
     dispatch({type:ORDER_POST_REQUEST})
     try{
-        const res=await axios.post("http://localhost:4500/order/addproduct",obj,{
+        const res=await axios.post("https://ajio-shop-web.onrender.com/order/addproduct",obj,{
             headers:{
                 Authorization:token
             }
@@ -19,7 +19,7 @@ export const AddOrder=(obj,token)=>async(dispatch)=>{
 export const GetOrders=(token)=>async(dispatch)=>{
     dispatch({type:ORDER_GET_REQUEST})
     try{
-        const res= await axios.get(`http://localhost:4500/order/getorders`,{
+        const res= await axios.get(`https://ajio-shop-web.onrender.com/order/getorders`,{
             headers:{
                 Authorization:token
             }
